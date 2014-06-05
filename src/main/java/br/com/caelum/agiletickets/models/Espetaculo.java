@@ -98,17 +98,7 @@ public class Espetaculo {
 	 */
 	public List<Sessao> criaSessoes(LocalDate inicio, LocalDate fim,
 			LocalTime horario, Periodicidade periodicidade) {
-		List<Sessao> sessoes = new ArrayList<Sessao>();
-		if (inicio.isBefore(fim) || inicio.isEqual(fim)) {
-			int numeroDeDias = Days.daysBetween(inicio, fim).getDays() + 1;
-			for (int i = 0; i < numeroDeDias; i++) {
-				Sessao sessao = new Sessao();
-				sessao.setEspetaculo(this);
-				sessao.setInicio(inicio.plusDays(i).toDateTime(horario));
-				sessoes.add(sessao);
-			}
-		}
-		return sessoes;
+		return periodicidade.getCriadorDeSessoes().cria(inicio, fim, horario, periodicidade, this);
 	}
 
 	public boolean Vagas(int qtd, int min) {
