@@ -1,10 +1,13 @@
 package br.com.caelum.agiletickets.acceptance;
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import br.com.caelum.agiletickets.acceptance.page.EstabelecimentosPage;
@@ -73,6 +76,18 @@ public class EstabelecimentoTest {
 		estabelecimentos.adicioneEstabelecimentoComEstacionamento(false);
 
 		estabelecimentos.ultimaLinhaDeveTerEstacionamento(false);
+	}
+	
+	@Test
+	public void deveMostarMensagemDeErroAoAdicionarEspetaculoVazio()
+	{
+		browser.navigate().to("http://localhost:8080");
+		WebElement linkEspetaculos = browser.findElement(By.linkText("Espetáculos"));
+		linkEspetaculos.click();
+		WebElement form = browser.findElement(By.id("addForm"));
+		form.submit();
+		WebElement mensagens = browser.findElement(By.id("errors"));
+		Assert.assertNotNull(mensagens);
 	}
 	
 }
