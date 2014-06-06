@@ -119,7 +119,7 @@ public class EspetaculoTest {
 		Espetaculo show = new Espetaculo();
 		List<Sessao> sessoes = show.criaSessoes(inicio, fim, horario,
 				Periodicidade.SEMANAL);
-		Assert.assertEquals(Weeks.weeksBetween(inicio, fim), sessoes.size());
+		Assert.assertEquals(Weeks.weeksBetween(inicio, fim).getWeeks() + 1, sessoes.size());
 		for (int i = 0; i < sessoes.size(); i++) {
 			Assert.assertEquals(show, 
 					sessoes.get(i).getEspetaculo());			
